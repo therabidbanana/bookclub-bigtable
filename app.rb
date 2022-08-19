@@ -80,6 +80,10 @@ class BookclubBigtable
     end
   end
 
+  def dump
+    SSTable.write_out(@db_path, @memtable)
+  end
+
   def read(key)
     begin
       return @memtable.read(key)
@@ -106,3 +110,6 @@ require 'pry'
 $db = BookclubBigtable.new
 
 binding.pry
+
+$db.dump
+
